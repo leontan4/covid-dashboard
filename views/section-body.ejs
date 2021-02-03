@@ -1,0 +1,47 @@
+<section class="main-section">
+    <div class="main-title">
+        <h1><span class="dashboard"><%= title(listItems) %><span></h1>
+        <p><em>Last Updated: <%= timeUpdate %></em></p>
+    </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row">
+        <div class="card-data col-lg-3 col-md-6">
+            <div class="confirmed-card bg-info">
+                <div class="card-body">
+                    <h5 class="card-title">Confirmed</h5>
+                    <i class="fas fa-viruses fa-4x"></i>
+                    <p class=card-text><%= numCommas(addition("cases")) %></p>
+                </div>
+            </div>
+        </div>
+        <div class="card-data col-lg-3 col-md-6">
+            <div class="death-card bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Deaths</h5>
+                    <i class="fas fa-skull-crossbones fa-4x"></i>
+                    <p class=card-text><%= numCommas(addition("deaths")) %></p>
+                </div>
+            </div>
+        </div>
+        <div class="card-data col-lg-3 col-md-6">
+            <div class="critical-card" style="background-color: orange;">
+                <div class="card-body">
+                    <h5 class="card-title">Critical</h5>
+                    <i class="fas fa-procedures fa-4x"></i>
+                    <p class=card-text><%= numCommas(addition("critical")) %></p>
+                </div>
+            </div>
+        </div>
+        <div class="card-data col-lg-3 col-md-6">
+            <div class="recovery-card bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Recovered</h5>
+                    <i class="fas fa-heartbeat fa-4x"></i>
+                    <p class=card-text><%= numCommas(addition("recovered")) %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

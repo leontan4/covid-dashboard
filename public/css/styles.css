@@ -1,0 +1,64 @@
+body {
+	font-family: "Montserrat", sans-serif;
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+.navbar-brand {
+	font-family: "Ubuntu", sans-serif;
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.header {
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+.container-fluid {
+	margin-bottom: 20px;
+}
+
+.card-body {
+	padding: 2% 3%;
+}
+
+.card-title {
+	font-family: "Noto Sans", sans-serif;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+.card-text {
+	font-family: "Noto Sans", sans-serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.country {
+	text-align: justify;
+}
+
+.table {
+	background-color: white;
+}
+
+.image-table {
+	width: 30px;
+	height: 20px;
+	object-fit: fill;
+	margin-right: 5px;
+}
+
+.dataTable {
+	font: 0.9em sans-serif;
+	overflow: auto;
+}
+
+.dangerData {
+	color: white;
+}
+
+.critical-card {
+	background-color: #ff8c00;
+}

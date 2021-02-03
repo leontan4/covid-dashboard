@@ -1,0 +1,35 @@
+<%- include("functions/functions") -%>
+<%- include("partials/header") -%>
+<%- include("section-body") -%>
+<section class="table-section container-fluid">
+    <table class="table table-bordered dataTable">
+        <thead>
+            <tr>
+                <th scope="col">Country</th>
+                <th scope="col">Total Cases</th>
+                <th scope="col">New Cases</th>
+                <th scope="col">Total Deaths</th>
+                <th scope="col">New Deaths</th>
+                <th scope="col">Recovered Cases</th>
+                <th scope="col">Critical Cases</th>
+                <th scope="col">Active Cases</th>
+            </tr>
+        </thead>
+        <tbody class=table-body>
+            <% listItems.forEach(item => { %>
+                <tr>
+                    <td class="country"><img class="image-table" src="<%= item.countryInfo.flag %>"/><u><a href="/country/<%= item.country %>"><%= item.country%></a></u></td>
+                    <td class="total-cases"><%= numCommas(item.cases) %></td>
+                    <td><%= numCommas(item.todayCases) %></td>
+                    <td><%= numCommas(item.deaths) %></td>
+                    <td class="dangerData bg-danger"><%= numCommas(item.todayDeaths) %></td>
+                    <td class="dangerData bg-success"><%= numCommas(item.recovered) %></td>
+                    <td class="dangerData" style="background-color: orange;"><%= numCommas(item.critical) %></td>
+                    <td><%= numCommas(item.active) %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</section>
+
+<%- include("partials/footer") -%>

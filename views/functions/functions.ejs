@@ -1,0 +1,25 @@
+<!-- Function for Title -->
+<% title = function(data){
+    if(data.length > 1) {
+        return "COVID-19 DASHBOARD"
+    }
+    else{
+        return `Details for ${data[0].country}`
+    }
+} %>
+
+<!-- Function for addition -->
+<% addition = function(key){
+    let total = 0;
+    listItems.forEach(item => total += item[`${key}`]);
+    return total;
+} %>
+
+<!-- Function for adding commas (",") into number and replace null to 0-->
+<% numCommas = function(num){
+    if (num === null) {
+        return 0;
+    } else { 
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+} %>
