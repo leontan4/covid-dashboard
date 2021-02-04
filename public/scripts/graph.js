@@ -30,7 +30,7 @@ const getData = async function () {
 			const cases = Object.entries(data.timeline.cases);
 			const deaths = Object.entries(data.timeline.deaths);
 			const recovered = Object.entries(data.timeline.recovered);
-			pushData(cases, timelineArr);
+			pushTime(cases, timelineArr);
 			pushData(cases, confirmedArr);
 			pushData(deaths, deathArr);
 			pushData(recovered, recoveredArr);
@@ -39,28 +39,31 @@ const getData = async function () {
 
 async function plotData() {
 	await getData();
-	var ctx = document.getElementById("myChart").getContext("2d");
+	var ctx = document.getElementById("myChart1").getContext("2d");
 	var myChart = new Chart(ctx, {
 		type: "line",
 		data: {
 			labels: timelineArr,
 			datasets: [
 				{
-					label: `# of confirmed`,
+					label: `Cases`,
 					data: confirmedArr,
 					borderWidth: 1,
+					fill: false,
 				},
-
 				{
-					label: `# of death`,
+					label: `Deaths`,
 					data: deathArr,
+					backgroundColor: "#dc3545",
 					borderWidth: 1,
+					fill: false,
 				},
-
 				{
-					label: `# of recovered`,
+					label: `Recovered`,
 					data: recoveredArr,
+					backgroundColor: "#28a745",
 					borderWidth: 1,
+					fill: false,
 				},
 			],
 		},
