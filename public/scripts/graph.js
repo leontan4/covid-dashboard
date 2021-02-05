@@ -2,7 +2,7 @@ const countryName = document
 	.querySelectorAll(".dashboard")[0]
 	.innerText.slice(12);
 
-const api_url = `https://disease.sh/v3/covid-19/historical/${countryName}?lastdays=all`;
+let api_url = `https://disease.sh/v3/covid-19/historical/`;
 
 const timelineArr = [];
 const confirmedArr = [];
@@ -21,7 +21,32 @@ const pushTime = function (data, array) {
 	});
 };
 
+function handleErrors(response) {
+	if (!response.ok) {
+		throw Error(response.statusText);
+	}
+	return response;
+}
+
 const getData = async function () {
+	await fetch(api_url)
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (data) {
+			data.forEach(function (country) {
+				if (
+					country.province != null &&
+					country.province === countryName.toLowerCase()
+				) {
+					const province = country.province.replace(/\s/g, "%20");
+					api_url += `${country.country}/${province}?lastdays=all`;
+				} else if (country.country === countryName) {
+					api_url += `${country.country}?lastdays=all`;
+				}
+			});
+		});
+
 	await fetch(api_url)
 		.then(function (response) {
 			return response.json();
@@ -38,36 +63,45 @@ const getData = async function () {
 };
 
 async function plotData() {
-	await getData();
-	var ctx = document.getElementById("myChart1").getContext("2d");
-	var myChart = new Chart(ctx, {
-		type: "line",
-		data: {
-			labels: timelineArr,
-			datasets: [
-				{
-					label: `Cases`,
-					data: confirmedArr,
-					borderWidth: 1,
-					fill: false,
-				},
-				{
-					label: `Deaths`,
-					data: deathArr,
-					backgroundColor: "#dc3545",
-					borderWidth: 1,
-					fill: false,
-				},
-				{
-					label: `Recovered`,
-					data: recoveredArr,
-					backgroundColor: "#28a745",
-					borderWidth: 1,
-					fill: false,
-				},
-			],
-		},
-	});
+	try {
+		await getData();
+		var ctx = document.getElementById("myChart1").getContext("2d");
+		var myChart = new Chart(ctx, {
+			type: "line",
+			data: {
+				labels: timelineArr,
+				datasets: [
+					{
+						label: `Cases`,
+						data: confirmedArr,
+						borderWidth: 1,
+						fill: false,
+					},
+					{
+						label: `Deaths`,
+						data: deathArr,
+						backgroundColor: "#dc3545",
+						borderWidth: 1,
+						fill: false,
+					},
+					{
+						label: `Recovered`,
+						data: recoveredArr,
+						backgroundColor: "#28a745",
+						borderWidth: 1,
+						fill: false,
+					},
+				],
+			},
+		});
+	} catch (err) {
+		document
+			.querySelector(".graph-country")
+			.insertAdjacentHTML(
+				"afterend",
+				'<h2 class="graph-error">Country not found or do not have any historical data</h2>'
+			);
+	}
 }
 
 plotData();
