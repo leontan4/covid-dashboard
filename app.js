@@ -32,7 +32,7 @@ const renderHTML = function (url, res, htmlPage) {
 
 // Render main page
 app.get("/", function (req, res) {
-	const url = `${mainURL}?yesterday=true&sort=cases&allowNull=true`;
+	const url = `${mainURL}?sort=cases&allowNull=true`;
 	renderHTML(url, res, "index");
 });
 
