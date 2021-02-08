@@ -9,7 +9,7 @@ app.set("view engine", "ejs");
 app.use(express.static(`public`));
 
 // Base URL and function
-const mainURL = "https://disease.sh/";
+const mainURL = "https://disease.sh/v3/covid-19/countries";
 const renderHTML = function (url, res, htmlPage) {
 	https.get(url, function (response) {
 		let body = "";
@@ -32,13 +32,13 @@ const renderHTML = function (url, res, htmlPage) {
 
 // Render main page
 app.get("/", function (req, res) {
-	const url = `${mainURL}v3/covid-19/countries`;
+	const url = `${mainURL}?yesterday=true&sort=cases&allowNull=true`;
 	renderHTML(url, res, "index");
 });
 
 // Render country page
 app.get("/country/:countryName", function (req, res) {
-	const url = `${mainURL}v3/covid-19/countries/${req.params.countryName}`;
+	const url = `${mainURL}/${req.params.countryName}`;
 	renderHTML(url, res, "country");
 });
 

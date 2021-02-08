@@ -19,11 +19,11 @@
         <tbody class=table-body>
             <% listCountry.forEach(country => { %>
                 <tr>
-                    <td class="country"><img class="image-table" src="<%= country.countryInfo.flag %>"/><u><a href="/country/<%= country.country %>"><%= country.country%></a></u></td>
+                    <td class="country"><img class="country-flag" src="<%= country.countryInfo.flag %>"/><u><a href="/country/<%= country.country %>"><%= country.country%></a></u></td>
                     <td class="total-cases"><%= numCommas(country.cases) %></td>
-                    <td>+<%= numCommas(country.todayCases) %></td>
+                    <td><%= numCommas(country.todayCases) %></td>
                     <td><%= numCommas(country.deaths) %></td>
-                    <td class="dangerData bg-danger">+<%= numCommas(country.todayDeaths) %></td>
+                    <td class="dangerData bg-danger"><%= numCommas(country.todayDeaths) %></td>
                     <td class="dangerData bg-success"><%= numCommas(country.recovered) %></td>
                     <td class="dangerData" style="background-color: orange;"><%= numCommas(country.critical) %></td>
                     <td><%= numCommas(country.active) %></td>
