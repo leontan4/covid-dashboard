@@ -1,24 +1,16 @@
+// Declare API
+let api_url = `https://disease.sh/v3/covid-19/historical/`;
+
+// Capture the Country's name on the header
 const countryName = document
 	.querySelectorAll(".dashboard")[0]
 	.innerText.slice(12);
 
-let api_url = `https://disease.sh/v3/covid-19/historical/`;
-let hopkins_url = `https://disease.sh/v3/covid-19/jhucsse/`;
-
+// Declare empty arrays
 const timelineArr = [];
 const confirmedArr = [];
 const deathArr = [];
 const recoveredArr = [];
-
-// Adding commas to large numbers
-numCommas = function (num) {
-	if (num === null) {
-		return 0;
-	} else {
-		num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		return parseInt(num);
-	}
-};
 
 // Pushing historical data
 const pushData = function (data, array) {
@@ -42,6 +34,7 @@ function handleErrors(response) {
 	return response;
 }
 
+// Render graph data
 const getData = async function () {
 	await fetch(api_url)
 		.then(function (response) {
@@ -90,6 +83,7 @@ const getData = async function () {
 		});
 };
 
+// Render graph plotting
 async function plotData() {
 	try {
 		await getData();
@@ -132,4 +126,5 @@ async function plotData() {
 	}
 }
 
+// Plot data
 plotData();

@@ -30,17 +30,19 @@ const renderHTML = function (url, res, htmlPage) {
 	});
 };
 
-// Render starts
+// Render main page
 app.get("/", function (req, res) {
 	const url = `${mainURL}v3/covid-19/countries`;
 	renderHTML(url, res, "index");
 });
 
+// Render country page
 app.get("/country/:countryName", function (req, res) {
 	const url = `${mainURL}v3/covid-19/countries/${req.params.countryName}`;
 	renderHTML(url, res, "country");
 });
 
+// Localhost or Heroku
 app.listen(process.env.PORT || 3000, function () {
 	console.log("Server is running on port 3000...");
 });
