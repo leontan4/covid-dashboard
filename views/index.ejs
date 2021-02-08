@@ -16,16 +16,16 @@
             </tr>
         </thead>
         <tbody class=table-body>
-            <% listItems.forEach(item => { %>
+            <% listCountry.forEach(country => { %>
                 <tr>
-                    <td class="country"><img class="image-table" src="<%= item.countryInfo.flag %>"/><u><a href="/country/<%= item.country %>"><%= item.country%></a></u></td>
-                    <td class="total-cases"><%= numCommas(item.cases) %></td>
-                    <td><%= numCommas(item.todayCases) %></td>
-                    <td><%= numCommas(item.deaths) %></td>
-                    <td class="dangerData bg-danger"><%= numCommas(item.todayDeaths) %></td>
-                    <td class="dangerData bg-success"><%= numCommas(item.recovered) %></td>
-                    <td class="dangerData" style="background-color: orange;"><%= numCommas(item.critical) %></td>
-                    <td><%= numCommas(item.active) %></td>
+                    <td class="country"><img class="image-table" src="<%= country.countryInfo.flag %>"/><u><a href="/country/<%= country.country %>"><%= country.country%></a></u></td>
+                    <td class="total-cases"><%= numCommas(country.cases) %></td>
+                    <td>+<%= numCommas(country.todayCases) %></td>
+                    <td><%= numCommas(country.deaths) %></td>
+                    <td class="dangerData bg-danger">+<%= numCommas(country.todayDeaths) %></td>
+                    <td class="dangerData bg-success"><%= numCommas(country.recovered) %></td>
+                    <td class="dangerData" style="background-color: orange;"><%= numCommas(country.critical) %></td>
+                    <td><%= numCommas(country.active) %></td>
                 </tr>
             <% }) %>
         </tbody>

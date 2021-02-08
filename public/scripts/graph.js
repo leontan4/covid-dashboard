@@ -3,18 +3,32 @@ const countryName = document
 	.innerText.slice(12);
 
 let api_url = `https://disease.sh/v3/covid-19/historical/`;
+let hopkins_url = `https://disease.sh/v3/covid-19/jhucsse/`;
 
 const timelineArr = [];
 const confirmedArr = [];
 const deathArr = [];
 const recoveredArr = [];
 
+// Adding commas to large numbers
+numCommas = function (num) {
+	if (num === null) {
+		return 0;
+	} else {
+		num = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return parseInt(num);
+	}
+};
+
+// Pushing historical data
 const pushData = function (data, array) {
 	data.forEach(function (newData) {
 		array.push(newData[1]);
 	});
 };
 
+// Pushing historical timeline
+// Have to separate because it would keep looping
 const pushTime = function (data, array) {
 	data.forEach(function (newData) {
 		array.push(newData[0]);
@@ -34,17 +48,31 @@ const getData = async function () {
 			return response.json();
 		})
 		.then(function (data) {
-			data.forEach(function (country) {
+			for (let i = 0; i < data.length; i++) {
 				if (
-					country.province != null &&
-					country.province === countryName.toLowerCase()
+					data[i].province ===
+					countryName
+						.toLowerCase()
+						.normalize("NFD")
+						.replace(/[\u0300-\u036f]/g, "")
 				) {
-					const province = country.province.replace(/\s/g, "%20");
-					api_url += `${country.country}/${province}?lastdays=all`;
-				} else if (country.country === countryName) {
-					api_url += `${country.country}?lastdays=all`;
+					const province = data[i].province.replace(/\s/g, "%20");
+					api_url += `${data[i].country}/${province}?lastdays=all`;
+				} else if (
+					data[i].country === countryName &&
+					data[i].province === null
+				) {
+					api_url += `${data[i].country}?lastdays=all`;
+				} else if (
+					countryName === "China" ||
+					countryName === "Canada" ||
+					countryName === "Australia" ||
+					countryName === "Diamond Princess"
+				) {
+					api_url += `${countryName}?lastdays=all`;
+					break;
 				}
-			});
+			}
 		});
 
 	await fetch(api_url)
@@ -99,7 +127,7 @@ async function plotData() {
 			.querySelector(".graph-country")
 			.insertAdjacentHTML(
 				"afterend",
-				'<h2 class="graph-error">Country not found or do not have any historical data</h2>'
+				'<h2 class="graph-error">Cannot get historical data</h2>'
 			);
 	}
 }

@@ -23,7 +23,7 @@ const renderHTML = function (url, res, htmlPage) {
 			const updatedTime = moment(info[0].updated).fromNow();
 
 			res.render(htmlPage, {
-				listItems: info,
+				listCountry: info,
 				timeUpdate: updatedTime,
 			});
 		});
