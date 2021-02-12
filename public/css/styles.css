@@ -55,6 +55,13 @@ body {
 	overflow: auto;
 }
 
+.dataTalbe_wrapper {
+	margin-top: 50px;
+	margin-right: 10px;
+	font: 0.9em sans-serif;
+	overflow: auto;
+}
+
 .dangerData {
 	color: white;
 }
