@@ -80,6 +80,10 @@ body {
 	overflow: auto;
 }
 
+table.dataTable.no-footer {
+	border-bottom: 0;
+}
+
 .DTFC_LeftBodyLiner {
 	overflow-x: hidden;
 }
