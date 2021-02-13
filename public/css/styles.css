@@ -17,22 +17,41 @@ body {
 
 .container-fluid {
 	margin-bottom: 20px;
+	justify-content: center;
+	padding: 0 30px 0 30px;
+	width: 100%;
 }
 
-.card-body {
-	padding: 2% 3%;
+.confirmed-div {
+	padding-right: 5.625px;
+}
+
+.death-div {
+	padding-left: 1.875px;
+	padding-right: 3.75px;
+}
+
+.critical-div {
+	padding-left: 3.75px;
+	padding-right: 1.875px;
+}
+
+.recovered-div {
+	padding-left: 5.625px;
 }
 
 .card-title {
 	font-family: "Noto Sans", sans-serif;
 	font-weight: 700;
 	font-size: 2rem;
+	text-align: center;
 }
 
 .card-text {
 	font-family: "Noto Sans", sans-serif;
 	font-size: 1.5rem;
 	font-weight: 700;
+	text-align: center;
 }
 
 .country {
@@ -55,9 +74,8 @@ body {
 	overflow: auto;
 }
 
-.dataTalbe_wrapper {
-	margin-top: 50px;
-	margin-right: 10px;
+.dataTable_wrapper {
+	margin: auto auto;
 	font: 0.9em sans-serif;
 	overflow: auto;
 }
@@ -66,6 +84,37 @@ body {
 	color: white;
 }
 
-.critical-card {
-	background-color: #ff8c00;
+@media (min-width: 768px) and (max-width: 991px) {
+	.confirmed-div {
+		padding-top: 7.5px;
+		padding-right: 3.75px;
+		padding-bottom: 3.75px;
+	}
+
+	.death-div {
+		padding-top: 7.5px;
+		padding-right: 15px;
+		padding-bottom: 3.75px;
+		padding-left: 3.75px;
+	}
+
+	.critical-div {
+		padding-top: 3.75px;
+		padding-right: 3.75px;
+		padding-left: 15px;
+	}
+
+	.recovered-div {
+		padding-top: 3.75px;
+		padding-left: 3.75px;
+	}
+}
+
+@media (max-width: 767px) {
+	.confirmed-div,
+	.death-div,
+	.critical-div,
+	.recovered-div {
+		padding: 0px 15px 7.5px;
+	}
 }
