@@ -31,12 +31,12 @@ body {
 	padding-right: 3.75px;
 }
 
-.critical-div {
+.recovered-div {
 	padding-left: 3.75px;
 	padding-right: 1.875px;
 }
 
-.recovered-div {
+.critical-div {
 	padding-left: 5.625px;
 }
 
@@ -98,13 +98,13 @@ body {
 		padding-left: 3.75px;
 	}
 
-	.critical-div {
+	.recovered-div {
 		padding-top: 3.75px;
 		padding-right: 3.75px;
 		padding-left: 15px;
 	}
 
-	.recovered-div {
+	.critical-div {
 		padding-top: 3.75px;
 		padding-left: 3.75px;
 	}
