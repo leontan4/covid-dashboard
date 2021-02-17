@@ -1,6 +1,9 @@
 // Declare API from 'https://disease.sh/' (JSON data is public, therefore no API key is needed)
 let api_url = `https://disease.sh/v3/covid-19/historical/`;
 
+//Selecting pre-loader
+const loader = document.querySelector(".loader");
+
 // Capture the Country's name on the header
 const countryName = document
 	.querySelectorAll(".dashboard")[0]
@@ -26,13 +29,6 @@ const pushTime = function (data, array) {
 		array.push(newData[0]);
 	});
 };
-
-function handleErrors(response) {
-	if (!response.ok) {
-		throw Error(response.statusText);
-	}
-	return response;
-}
 
 // Render graph data
 const getData = async function () {
@@ -85,10 +81,12 @@ const getData = async function () {
 		});
 };
 
+// -----------------------------------------------------------------------------
 // Render graph plotting
 async function plotData() {
 	try {
 		await getData();
+
 		var ctx = document.getElementById("myChart1").getContext("2d");
 		var myChart = new Chart(ctx, {
 			type: "line",
@@ -98,26 +96,46 @@ async function plotData() {
 					{
 						label: `Cases`,
 						data: confirmedArr,
-						borderWidth: 1,
-						fill: false,
+						backgroundColor: "rgba(255, 255, 255,0.2)",
+						borderColor: "#17a2b8",
+						borderWidth: 2,
 					},
 					{
 						label: `Deaths`,
 						data: deathArr,
-						backgroundColor: "#dc3545",
-						borderWidth: 1,
-						fill: false,
+						backgroundColor: "rgba(255, 255, 255,0.2)",
+						borderColor: "#dc3545",
+						borderWidth: 2,
 					},
 					{
 						label: `Recovered`,
 						data: recoveredArr,
-						backgroundColor: "#28a745",
-						borderWidth: 1,
-						fill: false,
+						backgroundColor: "rgba(255, 255, 255,0.2)",
+						borderColor: "#28a745",
+						borderWidth: 2,
 					},
 				],
 			},
-			options: {},
+			options: {
+				scales: {
+					xAxes: [
+						{
+							// type: "time",
+							// distribution: "linear",
+							ticks: {
+								display: true,
+								autoSkip: true,
+								maxTicksLimit: 10,
+							},
+						},
+					],
+				},
+				elements: {
+					point: {
+						radius: 0,
+					},
+				},
+			},
 		});
 	} catch (err) {
 		// Message for users once data could not be matched or no hisotrical data
@@ -128,6 +146,9 @@ async function plotData() {
 				'<h2 class="graph-error">Cannot get historical data</h2>'
 			);
 	}
+
+	// Removing loader once the data is fecth
+	loader.style.display = "none";
 }
 
 // Running function and plot data
