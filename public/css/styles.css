@@ -54,6 +54,10 @@ body {
 	text-align: center;
 }
 
+.card-body {
+	box-shadow: 0px 8px 6px -6px black;
+}
+
 .country {
 	text-align: justify;
 }
@@ -192,6 +196,10 @@ table.dataTable.no-footer {
 	.critical-div,
 	.recovered-div {
 		padding: 0px 15px 7.5px;
+	}
+
+	.navbar-brand {
+		margin: 0px;
 	}
 }
 
