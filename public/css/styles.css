@@ -197,10 +197,6 @@ table.dataTable.no-footer {
 	.recovered-div {
 		padding: 0px 15px 7.5px;
 	}
-
-	.navbar-brand {
-		margin: 0px;
-	}
 }
 
 @media (min-width: 715px) {
